@@ -1,3 +1,6 @@
+import os
+from dotenv import load_dotenv
+
 from flask import Flask
 
 from blueprints.auth import auth_bp
@@ -5,6 +8,15 @@ from blueprints.home import home_bp
 from blueprints.reservation import reservation_bp
 from blueprints.coupon import coupon_bp
 from blueprints.info import info_bp
+
+# .env を読み込み
+load_dotenv()
+# 環境変数を取得
+ENV = os.getenv("ENV")
+LIFF_ID = os.getenv("LIFF_ID")
+LINE_CHANNEL_ID = os.getenv("LINE_CHANNEL_ID")
+LINE_CHANNEL_SECRET = os.getenv("LINE_CHANNEL_SECRET")
+LINE_CHANNEL_ACCESS_TOKEN = os.getenv("LINE_CHANNEL_ACCESS_TOKEN")
 
 app = Flask(__name__)
 
