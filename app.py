@@ -1,5 +1,6 @@
 from flask import Flask
 
+from blueprints.auth import auth_bp
 from blueprints.home import home_bp
 from blueprints.reservation import reservation_bp
 from blueprints.coupon import coupon_bp
@@ -10,6 +11,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key'
 
 # Blueprint登録
+app.register_blueprint(auth_bp, url_prefix='/auth')
 app.register_blueprint(home_bp, url_prefix='/home')
 app.register_blueprint(reservation_bp, url_prefix='/reservation')
 app.register_blueprint(coupon_bp, url_prefix='/coupon')
