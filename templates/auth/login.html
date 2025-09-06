@@ -2,4 +2,46 @@
 
 {% block content %}
 <h1>Login</h1>
+<pre id="out">loading...</pre>
+<script>
+    const LIFF_ID = "{{ liff_id }}";
+    const ENV = "{{ env }}";
+    async function main() {
+        try {
+            if (ENV == "local") {
+                const info = {
+                    displayName: "山田太郎",
+                    userId: "1234567890",
+                    pictureUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgNVas3CdBAuNxjXIoBkgZui_EXK9ZXmlXk1pmMEx0_jrBcMweMAYE3yKFYGtzLUyoCVak7PQW4NV7mEfVf5-31QM8rwdaD-x1Ji9l5yhgSuynscaxTsmZc85LaGFl1HgTAkxJfcN7eoVrb/s800/animal_chara_computer_penguin.png",
+                    statusMessage: "こんにちは"
+                };
+            } else {
+                // 1) 初期化（毎ページで必要）
+                await liff.init({ liffId: LIFF_ID });
+                // 2) 未ログインならログインに送る（戻ってきたら以降が続行）
+                if (!liff.isLoggedIn()) {
+                    liff.login();        // ← 戻り先はこのページ
+                    return;
+                }
+                // 3) ログイン済みならプロフィール取得（最小サンプル）
+                const profile = await liff.getProfile();
+                const info = {
+                    inClient: liff.isInClient(),
+                    displayName: profile.displayName,
+                    userId: profile.userId,
+                    pictureUrl: profile.pictureUrl,
+                    statusMessage: profile.statusMessage
+                };
+            }
+            document.getElementById("out").textContent =
+                JSON.stringify(info, null, 2);
+        } catch (err) {
+            document.getElementById("out").textContent =
+                "LIFF error: " + (err?.message || String(err));
+        }
+    }
+
+    // DOM読み込み後に実行
+    document.addEventListener("DOMContentLoaded", main);
+</script>
 {% endblock %}
