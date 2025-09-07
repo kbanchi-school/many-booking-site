@@ -2,13 +2,549 @@
 <html lang="ja">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>WhhA | あなたの旅に、ちょうどいい予約を。</title>
+    <meta name="description" content="WhhAは清潔でシンプルな予約体験を提供します。" />
+    <style>
+        :root {
+            --brand: #1f6feb;
+            /* 主カラー（青） */
+            --brand-weak: #e7f0ff;
+            /* 薄い青 */
+            --ink: #0a1a2b;
+            /* 文字の基本色 */
+            --muted: #5c6b7a;
+            /* 補助文字色 */
+            --bg: #ffffff;
+            /* 背景 */
+            --card: #ffffff;
+            /* カード背景 */
+            --ring: #c9dbff;
+            /* 枠線 */
+            --shadow: 0 10px 30px rgba(31, 111, 235, .08);
+            --radius: 16px;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            background: var(--bg);
+            color: var(--ink);
+            font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+        }
+
+        a {
+            color: var(--brand);
+            text-decoration: none
+        }
+
+        a:hover {
+            text-decoration: underline
+        }
+
+        /* ヘッダー */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            backdrop-filter: saturate(150%) blur(8px);
+            background: rgba(255, 255, 255, .8);
+            border-bottom: 1px solid #eef3ff;
+        }
+
+        .container {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 20px
+        }
+
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px
+        }
+
+        .logo {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            font-weight: 800;
+            font-size: 20px;
+            letter-spacing: .2px
+        }
+
+        .logo-mark {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, var(--brand), #7ab8ff);
+            box-shadow: 0 6px 16px rgba(31, 111, 235, .25), inset 0 0 0 2px #ffffff50;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            font-weight: 600
+        }
+
+        .cta {
+            padding: 10px 16px;
+            border-radius: 999px;
+            background: var(--brand);
+            color: #fff;
+            font-weight: 700;
+            border: none;
+            box-shadow: 0 6px 20px rgba(31, 111, 235, .25);
+            cursor: pointer
+        }
+
+        .cta:hover {
+            opacity: .95
+        }
+
+        /* ヒーロー */
+        .hero {
+            position: relative;
+            padding: 64px 0 32px;
+            background:
+                radial-gradient(1200px 400px at 70% -10%, var(--brand-weak), transparent 60%),
+                radial-gradient(800px 300px at 10% 0%, #f6faff, transparent 50%)
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr .8fr;
+            gap: 32px;
+            align-items: center
+        }
+
+        .hero h1 {
+            font-size: 40px;
+            line-height: 1.15;
+            margin: 8px 0 16px
+        }
+
+        .hero p {
+            color: var(--muted);
+            font-size: 18px;
+            margin: 0 0 24px
+        }
+
+        .badge {
+            display: inline-flex;
+            gap: 8px;
+            align-items: center;
+            background: #fff;
+            border: 1px solid var(--ring);
+            border-radius: 999px;
+            padding: 6px 12px;
+            color: var(--brand);
+            font-weight: 700
+        }
+
+        .hero-card {
+            background: #fff;
+            border: 1px solid var(--ring);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 16px;
+        }
+
+        /* 検索フォーム */
+        .search {
+            display: grid;
+            grid-template-columns: 2fr 1.1fr 1.1fr 1fr auto;
+            gap: 12px
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 6px
+        }
+
+        .label {
+            font-size: 12px;
+            color: var(--muted);
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase
+        }
+
+        .control {
+            height: 44px;
+            padding: 0 12px;
+            border: 1px solid var(--ring);
+            border-radius: 12px;
+            background: #fff;
+            color: var(--ink);
+            outline: none;
+        }
+
+        .control:focus {
+            border-color: var(--brand);
+            box-shadow: 0 0 0 4px #1f6feb1a
+        }
+
+        .search-btn {
+            height: 44px;
+            padding: 0 18px;
+            border-radius: 12px;
+            background: var(--brand);
+            color: #fff;
+            border: none;
+            font-weight: 800;
+            cursor: pointer
+        }
+
+        .search-btn:hover {
+            opacity: .95
+        }
+
+        /* ハイライト */
+        .highlights {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 16px
+        }
+
+        .pill {
+            background: #fff;
+            border: 1px solid var(--ring);
+            border-radius: 12px;
+            padding: 12px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            color: var(--muted)
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--brand)
+        }
+
+        /* セクション */
+        section {
+            padding: 48px 0
+        }
+
+        .section-title {
+            font-size: 24px;
+            margin: 0 0 16px
+        }
+
+        .muted {
+            color: var(--muted)
+        }
+
+        /* カード */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--ring);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column
+        }
+
+        .thumb {
+            aspect-ratio: 16/10;
+            background:
+                linear-gradient(135deg, #eaf2ff, #ffffff 60%),
+                radial-gradient(1200px 400px at 80% -20%, var(--brand-weak), transparent 60%);
+            border-bottom: 1px solid var(--ring);
+        }
+
+        .card-body {
+            padding: 16px;
+            display: flex;
+            gap: 12px;
+            flex-direction: column
+        }
+
+        .price {
+            font-weight: 900;
+            color: var(--brand)
+        }
+
+        .ghost {
+            background: transparent;
+            border: 1px solid var(--ring);
+            height: 40px;
+            border-radius: 12px;
+            font-weight: 700
+        }
+
+        .ghost:hover {
+            border-color: var(--brand)
+        }
+
+        /* FAQ（ディテールズ） */
+        .faqs {
+            display: grid;
+            gap: 10px
+        }
+
+        details {
+            background: #fff;
+            border: 1px solid var(--ring);
+            border-radius: 12px;
+            padding: 12px
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 700
+        }
+
+        /* フッター */
+        footer {
+            padding: 36px 0;
+            border-top: 1px solid #eef3ff;
+            color: var(--muted)
+        }
+
+        .footgrid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            align-items: center
+        }
+
+        .small {
+            font-size: 12px
+        }
+
+        /* レスポンシブ */
+        @media (max-width: 960px) {
+            .hero-grid {
+                grid-template-columns: 1fr
+            }
+
+            .search {
+                grid-template-columns: 1fr 1fr;
+                grid-auto-rows: auto
+            }
+
+            .cards {
+                grid-template-columns: 1fr 1fr
+            }
+
+            .highlights {
+                grid-template-columns: 1fr
+            }
+        }
+
+        @media (max-width: 640px) {
+            .cards {
+                grid-template-columns: 1fr
+            }
+
+            .search {
+                grid-template-columns: 1fr
+            }
+
+            .hero h1 {
+                font-size: 32px
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <h1>WhhA</h1>
+    <!-- ヘッダー -->
+    <header class="nav">
+        <div class="container nav-inner">
+            <div class="logo">
+                <div class="logo-mark" aria-hidden="true"></div>
+                <span>WhhA</span>
+            </div>
+            <nav class="nav-links" aria-label="主要リンク">
+                <a href="#search">予約</a>
+                <a href="#rooms">客室</a>
+                <a href="#faq">FAQ</a>
+                <button class="cta">今すぐ予約</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ヒーロー -->
+    <section class="hero">
+        <div class="container hero-grid">
+            <div>
+                <span class="badge">清潔でシンプルな予約体験</span>
+                <h1>あなたの旅に、<br />ちょうどいい予約を。</h1>
+                <p>WhhAは、迷わないUIと透明な料金表示で、気持ちの良い予約体験をお届けします。</p>
+                <div class="highlights">
+                    <div class="pill"><span class="dot"></span>キャンセルポリシーを明確に表示</div>
+                    <div class="pill"><span class="dot"></span>チェックインは非接触でスムーズ</div>
+                    <div class="pill"><span class="dot"></span>24時間チャットサポート</div>
+                </div>
+            </div>
+            <aside class="hero-card" id="search" aria-label="検索フォーム">
+                <form class="search" method="get" action="#">
+                    <div class="field">
+                        <label class="label" for="where">行き先</label>
+                        <input class="control" id="where" name="where" type="text" placeholder="都市・エリア・施設名" required />
+                    </div>
+                    <div class="field">
+                        <label class="label" for="checkin">チェックイン</label>
+                        <input class="control" id="checkin" name="checkin" type="date" required />
+                    </div>
+                    <div class="field">
+                        <label class="label" for="checkout">チェックアウト</label>
+                        <input class="control" id="checkout" name="checkout" type="date" required />
+                    </div>
+                    <div class="field">
+                        <label class="label" for="guests">人数</label>
+                        <select class="control" id="guests" name="guests" required>
+                            <option value="1">1名</option>
+                            <option value="2" selected>2名</option>
+                            <option value="3">3名</option>
+                            <option value="4">4名</option>
+                            <option value="5">5名以上</option>
+                        </select>
+                    </div>
+                    <button class="search-btn" type="submit" aria-label="空室を検索">空室検索</button>
+                </form>
+                <p class="muted small" style="margin-top:10px;">※ 料金は税・サービス料込みの合計表示です。</p>
+            </aside>
+        </div>
+    </section>
+
+    <!-- おすすめ客室 -->
+    <section id="rooms">
+        <div class="container">
+            <h2 class="section-title">おすすめ</h2>
+            <p class="muted" style="margin-bottom:20px;">人気の客室タイプをピックアップ。青と白を基調に、落ち着いた時間を。</p>
+            <div class="cards">
+                <article class="card" aria-label="スタンダードダブル">
+                    <div class="thumb" role="img" aria-label="白と青のスタンダードダブル客室のイメージ"></div>
+                    <div class="card-body">
+                        <h3>スタンダードダブル</h3>
+                        <p class="muted">2名まで・クイーンベッド・シャワー</p>
+                        <div class="price">¥9,800〜/泊</div>
+                        <button class="ghost">詳細を見る</button>
+                    </div>
+                </article>
+                <article class="card" aria-label="スーペリアツイン">
+                    <div class="thumb" role="img" aria-label="白と青のスーペリアツイン客室のイメージ"></div>
+                    <div class="card-body">
+                        <h3>スーペリアツイン</h3>
+                        <p class="muted">3名まで・ツイン＋エキストラ・バスタブ</p>
+                        <div class="price">¥13,400〜/泊</div>
+                        <button class="ghost">詳細を見る</button>
+                    </div>
+                </article>
+                <article class="card" aria-label="プレミアムスイート">
+                    <div class="thumb" role="img" aria-label="白と青のプレミアムスイート客室のイメージ"></div>
+                    <div class="card-body">
+                        <h3>プレミアムスイート</h3>
+                        <p class="muted">4名まで・リビング付き・ビュー確約</p>
+                        <div class="price">¥24,000〜/泊</div>
+                        <button class="ghost">詳細を見る</button>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- 特長 -->
+    <section>
+        <div class="container cards">
+            <div class="card">
+                <div class="card-body">
+                    <h3>透明な料金表示</h3>
+                    <p class="muted">追加料金や細かな条件を先に表示。あとで驚かない、気持ちよい予約体験を。</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h3>かんたんチェックイン</h3>
+                    <p class="muted">QRコードで非接触チェックイン。到着後の手続きは最小限に。</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h3>24時間サポート</h3>
+                    <p class="muted">困ったらいつでもチャット。日本語／英語に対応予定。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+        <div class="container">
+            <h2 class="section-title">よくある質問</h2>
+            <div class="faqs">
+                <details>
+                    <summary>支払い方法は？</summary>
+                    <p class="muted">クレジットカード（主要ブランド）に対応。現地決済または事前決済をお選びいただけます。</p>
+                </details>
+                <details>
+                    <summary>キャンセルポリシーは？</summary>
+                    <p class="muted">プランにより異なりますが、予約画面で明確に表示します。無料キャンセル期間を設けたプランも。</p>
+                </details>
+                <details>
+                    <summary>チェックイン／チェックアウトの時間は？</summary>
+                    <p class="muted">通常は15:00チェックイン、11:00チェックアウトです（施設により前後します）。</p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer>
+        <div class="container footgrid">
+            <div class="small">© <span id="y"></span> WhhA. All rights reserved.</div>
+            <div style="text-align:right" class="small">
+                <a href="#">利用規約</a> ・ <a href="#">プライバシー</a> ・ <a href="#faq">サポート</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 年表示
+        document.getElementById('y').textContent = new Date().getFullYear();
+
+        // チェックアウトはチェックインより後に
+        const ci = document.getElementById('checkin');
+        const co = document.getElementById('checkout');
+        const today = new Date().toISOString().split('T')[0];
+        ci.min = today;
+        co.min = today;
+        ci.addEventListener('change', () => {
+            co.min = ci.value || today;
+            if (co.value && co.value <= ci.value) {
+                const d = new Date(ci.value);
+                d.setDate(d.getDate() + 1);
+                co.value = d.toISOString().split('T')[0];
+            }
+        });
+    </script>
 </body>
 
 </html>
