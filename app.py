@@ -22,5 +22,25 @@ def kazunori():
 def aoi():
     return render_template('aoi.html')
 
+@app.route('/top')
+def top():
+    return render_template('top.html')
+
+@app.route('/home')
+def home():
+    return render_template('home.html')
+
+@app.route('/reservation')
+def reservation():
+    return render_template('reservation.html')
+
+@app.route('/coupon')
+def coupon():
+    return render_template('coupon.html')
+
+@app.route('/info')
+def info():
+    return render_template('info.html')
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5001)
