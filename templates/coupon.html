@@ -1,5 +1,218 @@
-{% extends "layout.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>クーポン</h1>
+    <h4>あなたのための特別なクーポン</h4>
+    <br>
 
-{% block content %}
-<h1>Coupon</h1>
-{% endblock %}
+
+    <!-- 脱毛 -->
+    <div class="col-md-6 col-lg-3">
+      <div class="coupon-card luxury-coupon text-center">
+        <div class="shine"></div>
+        <div class="ribbon"><span>Special</span></div>
+        <div class="coupon-header">
+          <i class="bi bi-flower3"></i>
+          <h5 class="fw-bold">脱毛クーポン</h5>
+        </div>
+        <div class="coupon-body">
+          <p class="display-6 fw-bold text-primary mb-1">¥1,000 OFF</p>
+          <p class="text-muted">予約時に自動適用</p>
+          <hr class="coupon-divider">
+          <span class="badge luxury-badge mb-3">有効期限: 2025/12/31</span><br>
+          <button class="btn luxury-btn px-4 py-2">今すぐ予約</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 鍼灸 -->
+    <div class="col-md-6 col-lg-3">
+      <div class="coupon-card luxury-coupon text-center">
+        <div class="shine"></div>
+        <div class="ribbon"><span>Special</span></div>
+        <div class="coupon-header">
+          <i class="bi bi-droplet"></i>
+          <h5 class="fw-bold">鍼灸クーポン</h5>
+        </div>
+        <div class="coupon-body">
+          <p class="display-6 fw-bold text-primary mb-1">15% OFF</p>
+          <p class="text-muted">予約時に自動適用</p>
+          <hr class="coupon-divider">
+          <span class="badge luxury-badge mb-3">有効期限: 2025/12/31</span><br>
+          <button class="btn luxury-btn px-4 py-2">今すぐ予約</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ホワイトニング -->
+    <div class="col-md-6 col-lg-3">
+      <div class="coupon-card luxury-coupon text-center">
+        <div class="shine"></div>
+        <div class="ribbon"><span>Special</span></div>
+        <div class="coupon-header">
+          <i class="bi bi-brightness-high"></i>
+          <h5 class="fw-bold">ホワイトニングクーポン</h5>
+        </div>
+        <div class="coupon-body">
+          <p class="display-6 fw-bold text-primary mb-1">20% OFF</p>
+          <p class="text-muted">予約時に自動適用</p>
+          <hr class="coupon-divider">
+          <span class="badge luxury-badge mb-3">有効期限: 2025/12/31</span><br>
+          <button class="btn luxury-btn px-4 py-2">今すぐ予約</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ヘアカット -->
+    <div class="col-md-6 col-lg-3">
+      <div class="coupon-card luxury-coupon text-center">
+        <div class="shine"></div>
+        <div class="ribbon"><span>Special</span></div>
+        <div class="coupon-header">
+          <i class="bi bi-scissors"></i>
+          <h5 class="fw-bold">ヘアカットクーポン</h5>
+        </div>
+        <div class="coupon-body">
+          <p class="display-6 fw-bold text-primary mb-1">20% OFF</p>
+          <p class="text-muted">予約時に自動適用</p>
+          <hr class="coupon-divider">
+          <span class="badge luxury-badge mb-3">有効期限: 2025/12/31</span><br>
+          <button class="btn luxury-btn px-4 py-2">今すぐ予約</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
+<style>
+  /* 全体カード */
+  .luxury-coupon {
+    border-radius: 25px;
+    background: linear-gradient(145deg, #ffffff 40%, #e8f9ff 100%);
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 123, 255, 0.2), inset 0 0 20px rgba(255, 255, 255, 0.3);
+    transition: all 0.4s ease-in-out;
+  }
+
+  .luxury-coupon:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 50px rgba(0, 123, 255, 0.35), inset 0 0 25px rgba(255, 255, 255, 0.5);
+  }
+
+  /* ヘッダー */
+  .coupon-header {
+    background: linear-gradient(135deg, #0dcaf0, #66d9ff);
+    color: #fff;
+    padding: 1.5rem;
+    border-bottom: 2px dashed rgba(255,255,255,0.5);
+  }
+
+  .coupon-header i {
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  /* 本体 */
+  .coupon-body {
+    padding: 2rem 1.5rem;
+  }
+
+  .coupon-divider {
+    border-top: 2px dashed #0dcaf0;
+    margin: 1.2rem auto;
+    width: 80%;
+  }
+
+  /* バッジ */
+  .luxury-badge {
+    background: linear-gradient(135deg, #f9f9f9, #e6f9ff);
+    color: #0d6efd;
+    border: 1px solid #0dcaf0;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-weight: 500;
+    box-shadow: 0 2px 6px rgba(13, 202, 240, 0.3);
+  }
+
+  /* ボタン */
+  .luxury-btn {
+    background: linear-gradient(135deg, #0dcaf0, #007bff);
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+    transition: all 0.3s ease;
+  }
+
+  .luxury-btn:hover {
+    background: linear-gradient(135deg, #007bff, #0dcaf0);
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.5);
+    transform: scale(1.05);
+  }
+
+  /* リボン */
+  .ribbon {
+    width: 160px;
+    height: 160px;
+    overflow: hidden;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+  }
+
+  .ribbon span {
+    position: absolute;
+    display: block;
+    width: 220px;
+    padding: 10px 0;
+    background: linear-gradient(135deg, #ffd700, #ffecb3);
+    color: #333;
+    text-align: center;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transform: rotate(45deg);
+    top: 30px;
+    right: -55px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+  }
+
+  /* ✨ 光沢エフェクト */
+  .shine {
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+      120deg,
+      rgba(255,255,255,0) 0%,
+      rgba(255,255,255,0.6) 50%,
+      rgba(255,255,255,0) 100%
+    );
+    transform: skewX(-20deg);
+    animation: shine 4s infinite;
+  }
+
+  @keyframes shine {
+    0% { left: -75%; }
+    100% { left: 125%; }
+  }
+</style>
+
+
+</body>
+</html>
