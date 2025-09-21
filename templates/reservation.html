@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends "layout.html" %}
+
+{% block content %}
 <div class="container my-5">
   <!-- ページタイトル -->
   <div class="text-center mb-5">
@@ -68,75 +63,4 @@
     </div>
   </div>
 </div>
-
-<style>
-  /* 見出しの下ライン */
-  .underline {
-    width: 80px;
-    height: 4px;
-    background: linear-gradient(90deg, #0dcaf0, #007bff);
-    border-radius: 2px;
-    margin-top: 10px;
-  }
-
-  /* クーポン風予約カード */
-  .coupon-card {
-    border-radius: 20px;
-    background: #fff;
-    border: 1px solid rgba(0, 123, 255, 0.15);
-    box-shadow: 0 10px 25px rgba(0, 123, 255, 0.15);
-    overflow: hidden;
-    transition: all 0.3s ease;
-  }
-  .coupon-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(0, 123, 255, 0.25);
-  }
-
-  /* カードヘッダー */
-  .coupon-header {
-    background: linear-gradient(135deg, #0dcaf0, #007bff);
-    color: #fff;
-    text-align: center;
-    font-size: 1.2rem;
-    font-weight: bold;
-    padding: 1rem;
-  }
-
-  /* カード本文 */
-  .coupon-body {
-    padding: 1.5rem;
-  }
-
-  /* 入力欄 */
-  .form-control {
-    border-radius: 10px;
-    border: 1px solid #0dcaf0;
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
-  }
-  .form-control:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 10px rgba(13, 202, 240, 0.4);
-  }
-
-  /* ボタン */
-  .coupon-btn {
-    background: linear-gradient(135deg, #0dcaf0, #007bff);
-    color: #fff;
-    border-radius: 50px;
-    font-weight: bold;
-    padding: 0.6rem;
-    box-shadow: 0 5px 15px rgba(0,123,255,0.3);
-    transition: all 0.3s ease;
-  }
-  .coupon-btn:hover {
-    background: linear-gradient(135deg, #007bff, #0dcaf0);
-    box-shadow: 0 8px 25px rgba(0,123,255,0.5);
-    transform: scale(1.05);
-  }
-</style>
-
-
-
-</body>
-</html>
+{% endblock %}
