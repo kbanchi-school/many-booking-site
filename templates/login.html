@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>Login</h1>
+<div class="container">
+    <div class="text-center">
+        <pre id="out">loading...</pre>
+        <p id="displayName"></p>
+        <p id="userId"></p>
+        <img id="pictureUrl" src="" alt="pictureUrl" width="30%" height="30%">
+        <p id="statusMessage"></p>
+    </div>
+</div>
+<script>
+    const LIFF_ID = "{{ liff_id }}";
+    const ENV = "{{ env }}";
+    let info = null;
+    async function main() {
+        try {
+            if (ENV == "local") {
+                console.log("ENV is local");
+                info = {
+                    displayName: "山田太郎",
+                    userId: "1234567890",
+                    pictureUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgNVas3CdBAuNxjXIoBkgZui_EXK9ZXmlXk1pmMEx0_jrBcMweMAYE3yKFYGtzLUyoCVak7PQW4NV7mEfVf5-31QM8rwdaD-x1Ji9l5yhgSuynscaxTsmZc85LaGFl1HgTAkxJfcN7eoVrb/s800/animal_chara_computer_penguin.png",
+                    statusMessage: "こんにちは"
+                };
+                console.log(info);
+            } else {
+                console.log("ENV is not local");
+                // 1) 初期化（毎ページで必要）
+                await liff.init({ liffId: LIFF_ID });
+                // 2) 未ログインならログインに送る（戻ってきたら以降が続行）
+                if (!liff.isLoggedIn()) {
+                    liff.login();        // ← 戻り先はこのページ
+                    return;
+                }
+                // 3) ログイン済みならプロフィール取得（最小サンプル）
+                const profile = await liff.getProfile();
+                info = {
+                    inClient: liff.isInClient(),
+                    displayName: profile.displayName,
+                    userId: profile.userId,
+                    pictureUrl: profile.pictureUrl,
+                    statusMessage: profile.statusMessage
+                };
+                console.log(info);
+            }
+            document.getElementById("out").textContent = "";
+            document.getElementById("displayName").textContent = info.displayName;
+            document.getElementById("userId").textContent = info.userId;
+            document.getElementById("pictureUrl").src = info.pictureUrl;
+            document.getElementById("statusMessage").textContent = info.statusMessage;
+        } catch (err) {
+            document.getElementById("out").textContent =
+                "LIFF error: " + (err?.message || String(err));
+        }
+    }
+
+    // DOM読み込み後に実行
+    document.addEventListener("DOMContentLoaded", main);
+</script>
+{% endblock %}

@@ -1,13 +1,34 @@
+import os
+
 from flask import Flask
 from flask import render_template
 
 from database import *
+
+from dotenv import load_dotenv
+load_dotenv()
+
+# .env を読み込み
+load_dotenv()
+# 環境変数を取得
+ENV = os.getenv("ENV")
+LIFF_ID = os.getenv("LIFF_ID")
+LINE_CHANNEL_ID = os.getenv("LINE_CHANNEL_ID")
+LINE_CHANNEL_SECRET = os.getenv("LINE_CHANNEL_SECRET")
+LINE_CHANNEL_ACCESS_TOKEN = os.getenv("LINE_CHANNEL_ACCESS_TOKEN")
+
+LIFF_ID = os.getenv("LIFF_ID")
+ENV = os.getenv("ENV")
 
 app = Flask(__name__)
 
 @app.route('/')
 def hello():
     return render_template('hello.html')
+
+@app.route('/login')
+def login():
+    return render_template('login.html', liff_id=LIFF_ID, env=ENV)
 
 @app.route('/db_work')
 def db_work():
