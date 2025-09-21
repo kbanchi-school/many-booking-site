@@ -15,6 +15,45 @@
         .main-color {
             background-color: #87CEEB;
         }
+
+        .footer-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: #fff;
+            border-top: 1px solid #ddd;
+        }
+
+        .footer-nav ul {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .footer-nav li a {
+            text-decoration: none;
+            color: #555;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 12px;
+        }
+
+        .footer-nav li a i {
+            font-size: 18px;
+            margin-bottom: 2px;
+        }
+
+        .footer-nav li.active a {
+            color: #007bff;
+            /* アクティブ時に青く表示 */
+        }
     </style>
 </head>
 
@@ -60,6 +99,37 @@
             </div>
         </div>
     </nav>
+    <!-- ▼ Footer Navigation ▼ -->
+    <footer class="footer-nav">
+        <nav>
+            <ul>
+                <li class="">
+                    <a href="/home">
+                        <i class="fa fa-home"></i>
+                        <span>ホーム</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="/reservation">
+                        <i class="fa fa-calendar"></i>
+                        <span>予約</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="/coupon">
+                        <i class="fa fa-gift"></i>
+                        <span>クーポン</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="/info">
+                        <i class="fa fa-bell"></i>
+                        <span>お知らせ</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </footer>
     {% block content %}{% endblock %}
 </body>
 
