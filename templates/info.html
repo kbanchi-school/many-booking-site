@@ -1,14 +1,24 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<p class="text-white bg-primary">お知らせ<br>店舗からの最新情報</br></p>
+<p class="text-white main-color">お知らせ<br>店舗からの最新情報</br></p>
+    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+      <div class="btn-group me-2,position-absolute top-0 start-50 translate-middle" role="group" aria-label="First group">
+        <button type="button" class="btn btn-dark">すべて</button>
+        <button type="button" class="btn btn-dark">未読</button>
+        <button type="button" class="btn btn-dark">既読</button>
+      </div>
 
-<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-  <div class="btn-group me-2,position-absolute top-0 start-50 translate-middle" role="group" aria-label="First group">
-    <button type="button" class="btn btn-dark">すべて</button>
-    <button type="button" class="btn btn-dark">未読</button>
-    <button type="button" class="btn btn-dark">既読</button>
-  </div>
+
+    <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">新春キャンペーン開始！</h5>
+          <small>1/1</small>
+        </div>
+        <p class="mb-1">一か月限定</p>
+        <small>美容室サロンA</small>
+    </a>
 
 
+  
 {% endblock %}
