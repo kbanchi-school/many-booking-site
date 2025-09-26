@@ -14,18 +14,37 @@
 <script>
     const LIFF_ID = "{{ liff_id }}";
     const ENV = "{{ env }}";
+    let idToken = null;
+    let profile = null;
     let info = null;
+
+    async function registerToServer(idToken, profile) {
+        const resp = await fetch("liff-login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id_token: idToken, profile })
+        });
+        return resp.json();
+    }
+
     async function main() {
         try {
             if (ENV == "local") {
                 console.log("ENV is local");
+                idToken = "idToken1234567890";
+                profile = {
+                    "userId": "1234567890",
+                    "displayName": "山田太郎",
+                    "pictureUrl": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgNVas3CdBAuNxjXIoBkgZui_EXK9ZXmlXk1pmMEx0_jrBcMweMAYE3yKFYGtzLUyoCVak7PQW4NV7mEfVf5-31QM8rwdaD-x1Ji9l5yhgSuynscaxTsmZc85LaGFl1HgTAkxJfcN7eoVrb/s800/animal_chara_computer_penguin.png"
+                }
                 info = {
                     displayName: "山田太郎",
                     userId: "1234567890",
                     pictureUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgNVas3CdBAuNxjXIoBkgZui_EXK9ZXmlXk1pmMEx0_jrBcMweMAYE3yKFYGtzLUyoCVak7PQW4NV7mEfVf5-31QM8rwdaD-x1Ji9l5yhgSuynscaxTsmZc85LaGFl1HgTAkxJfcN7eoVrb/s800/animal_chara_computer_penguin.png",
                     statusMessage: "こんにちは"
                 };
-                console.log(info);
+                // サーバにIDトークンを渡して検証 → セッション保存
+                const result = await registerToServer(idToken, profile);
             } else {
                 console.log("ENV is not local");
                 // 1) 初期化（毎ページで必要）
@@ -36,7 +55,8 @@
                     return;
                 }
                 // 3) ログイン済みならプロフィール取得（最小サンプル）
-                const profile = await liff.getProfile();
+                idToken = await liff.getIDToken();
+                profile = await liff.getProfile();
                 info = {
                     inClient: liff.isInClient(),
                     displayName: profile.displayName,
@@ -44,7 +64,9 @@
                     pictureUrl: profile.pictureUrl,
                     statusMessage: profile.statusMessage
                 };
-                console.log(info);
+
+                // サーバにIDトークンを渡して検証 → セッション保存
+                const result = await registerToServer(idToken, profile);
             }
             document.getElementById("out").textContent = "";
             document.getElementById("displayName").textContent = info.displayName;
