@@ -1,5 +1,22 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<h1>Top</h1>
+<div class="mt-2 ms-2">
+    <div class="m-4">
+        <h2>Person 登録サンプル</h2>
+        <form action="/top/person" method="post">
+            <input type="text" name="name" placeholder="名前">
+            <input type="text" name="age" placeholder="年齢">
+            <button type="submit">登録</button>
+        </form>
+    </div>
+    <div class="m-4">
+        <h2>Person 一覧</h2>
+        <ul>
+            {% for person in persons %}
+            <li>{{ person.name }} {{ person.age }} <a href="/top/detail/{{ person.id }}">くわしくはこちら</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
 {% endblock %}

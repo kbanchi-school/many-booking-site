@@ -8,8 +8,13 @@ from flask import request
 from flask import jsonify
 from flask import current_app
 
-import requests
+from blueprints.top import top_bp
+from blueprints.home import home_bp
+from blueprints.reservation import reservation_bp
+from blueprints.coupon import coupon_bp
+from blueprints.info import info_bp
 
+import requests
 
 from datetime import timedelta
 
@@ -24,6 +29,7 @@ load_dotenv()
 def create_app():
     app = Flask(__name__)
     
+    # 設定
     app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "dev-secret")
     app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
     app.config["SESSION_COOKIE_SECURE"] = False  # 本番は True + HTTPS
@@ -35,6 +41,13 @@ def create_app():
     app.config["LINE_CHANNEL_ID"] = os.getenv("LINE_CHANNEL_ID")
     app.config["LINE_CHANNEL_SECRET"] = os.getenv("LINE_CHANNEL_SECRET")
     app.config["LINE_CHANNEL_ACCESS_TOKEN"] = os.getenv("LINE_CHANNEL_ACCESS_TOKEN")
+    
+    # Blueprint
+    app.register_blueprint(top_bp, url_prefix='/top')
+    app.register_blueprint(home_bp, url_prefix='/home')
+    app.register_blueprint(reservation_bp, url_prefix='/reservation')
+    app.register_blueprint(coupon_bp, url_prefix='/coupon')
+    app.register_blueprint(info_bp, url_prefix='/info')
 
     # テンプレ共通変数: current_user を常に使えるように
     @app.context_processor
@@ -72,26 +85,6 @@ def create_app():
     def aoi():
         return render_template('aoi.html')
 
-    @app.route('/top')
-    def top():
-        return render_template('top.html')
-
-    @app.route('/home')
-    def home():
-        return render_template('home.html')
-
-    @app.route('/reservation')
-    def reservation():
-        return render_template('reservation.html')
-
-    @app.route('/coupon')
-    def coupon():
-        return render_template('coupon.html')
-
-    @app.route('/info')
-    def info():
-        return render_template('info.html')
-    
     @app.route("/liff-login", methods=["POST"])
     def liff_login():
         """
