@@ -140,6 +140,6 @@ def create_app():
 if __name__ == '__main__':
     app = create_app()
     if app.config["ENV"] == "local" or app.config["ENV"] == "dev":
-        app.run(debug=True, host='0.0.0.0', port=5001, ssl_context=("ssl/localhost+2.pem", "ssl/localhost+2-key.pem"))
+        app.run(debug=True, host='0.0.0.0', port=5001)  
     else:
         app.run(debug=True, host='0.0.0.0', port=5001)

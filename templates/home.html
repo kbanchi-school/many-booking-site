@@ -1,5 +1,16 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<h1>Home</h1>
+<h1 class="text-white main-color">シェアサロン予約</h1>
+<div class="input-group">
+	<input type="text" class="form-control" placeholder="サロン名・サービス・エリアで検索">
+	<span class="input-group-btn">
+		<button type="button" class="btn btn-primary">検索</button>
+	</span>
+</div>
+<button type="button" class="btn btn-primary">すべて</button>
+<button type="button" class="btn btn-primary">カット</button>
+<button type="button" class="btn btn-primary">脱毛</button>
+<button type="button" class="btn btn-primary">鍼灸</button>
+<button type="button" class="btn btn-primary">ネイル</button>
 {% endblock %}
