@@ -1,87 +1,61 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<h1>クーポン</h1>
-<h4>あなたのための特別なクーポン</h4>
+<h1 class="text-white main-color">クーポン</h1>
+<h1 class="text-white main-color">お得なクーポンをご利用ください</h1>
+
+<div class="text-bg-warning p-3">🎁今月の特典  新規会員様限定で初回20%OFFクーポン配布中！</div>
+
+<br>
+
+ <div class="text-center">
+<button type="button" class="btn btn-secondary">利用可能</button>
+<button type="button" class="btn btn-secondary">使用済み</button>
+<button type="button" class="btn btn-secondary">期限切れ</button>
+</div>
+
 <br>
 
 
-<!-- 脱毛 -->
-<div class="col-md-6 col-lg-3">
-  <div class="coupon-card luxury-coupon text-center">
-    <div class="shine"></div>
-    <div class="ribbon"><span>Special</span></div>
-    <div class="coupon-header">
-      <i class="bi bi-flower3"></i>
-      <h5 class="fw-bold">脱毛クーポン</h5>
-    </div>
-    <div class="coupon-body">
-      <p class="display-6 fw-bold text-primary mb-1">¥1,000 OFF</p>
-      <p class="text-muted">予約時に自動適用</p>
-      <hr class="coupon-divider">
-      <span class="badge luxury-badge mb-3">有効期限: 2025/12/31</span><br>
-      <button class="btn luxury-btn px-4 py-2">今すぐ予約</button>
-    </div>
+  <div class="text-center">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">鍼灸</h5>
+        <p class="card-text">〇月〇日まで有効</p>
+        <a href="#" class="btn btn-primary">使用する</a>
+      </div>
+  </div>
+</div>
+  <div class="text-center">
+
+
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">ホワイトニング</h5>
+        <p class="card-text">〇月〇日まで有効</p>
+        <a href="#" class="btn btn-primary">使用する</a>
+      </div>
   </div>
 </div>
 
-<!-- 鍼灸 -->
-<div class="col-md-6 col-lg-3">
-  <div class="coupon-card luxury-coupon text-center">
-    <div class="shine"></div>
-    <div class="ribbon"><span>Special</span></div>
-    <div class="coupon-header">
-      <i class="bi bi-droplet"></i>
-      <h5 class="fw-bold">鍼灸クーポン</h5>
-    </div>
-    <div class="coupon-body">
-      <p class="display-6 fw-bold text-primary mb-1">15% OFF</p>
-      <p class="text-muted">予約時に自動適用</p>
-      <hr class="coupon-divider">
-      <span class="badge luxury-badge mb-3">有効期限: 2025/12/31</span><br>
-      <button class="btn luxury-btn px-4 py-2">今すぐ予約</button>
-    </div>
+  <div class="text-center">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">ヘアカット</h5>
+        <p class="card-text">〇月〇日まで有効</p>
+        <a href="#" class="btn btn-primary">使用する</a>
+      </div>
   </div>
 </div>
 
-<!-- ホワイトニング -->
-<div class="col-md-6 col-lg-3">
-  <div class="coupon-card luxury-coupon text-center">
-    <div class="shine"></div>
-    <div class="ribbon"><span>Special</span></div>
-    <div class="coupon-header">
-      <i class="bi bi-brightness-high"></i>
-      <h5 class="fw-bold">ホワイトニングクーポン</h5>
-    </div>
-    <div class="coupon-body">
-      <p class="display-6 fw-bold text-primary mb-1">20% OFF</p>
-      <p class="text-muted">予約時に自動適用</p>
-      <hr class="coupon-divider">
-      <span class="badge luxury-badge mb-3">有効期限: 2025/12/31</span><br>
-      <button class="btn luxury-btn px-4 py-2">今すぐ予約</button>
-    </div>
+  <div class="text-center">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">脱毛</h5>
+        <p class="card-text">〇月〇日まで有効</p>
+        <a href="#" class="btn btn-primary">使用する</a>
+      </div>
   </div>
 </div>
 
-<!-- ヘアカット -->
-<div class="col-md-6 col-lg-3">
-  <div class="coupon-card luxury-coupon text-center">
-    <div class="shine"></div>
-    <div class="ribbon"><span>Special</span></div>
-    <div class="coupon-header">
-      <i class="bi bi-scissors"></i>
-      <h5 class="fw-bold">ヘアカットクーポン</h5>
-    </div>
-    <div class="coupon-body">
-      <p class="display-6 fw-bold text-primary mb-1">20% OFF</p>
-      <p class="text-muted">予約時に自動適用</p>
-      <hr class="coupon-divider">
-      <span class="badge luxury-badge mb-3">有効期限: 2025/12/31</span><br>
-      <button class="btn luxury-btn px-4 py-2">今すぐ予約</button>
-    </div>
-  </div>
-</div>
-
-</div>
-</div>
 {% endblock %}

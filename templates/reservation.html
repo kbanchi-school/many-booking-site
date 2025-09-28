@@ -4,63 +4,27 @@
 <div class="container my-5">
   <!-- ページタイトル -->
   <div class="text-center mb-5">
-    <h1 class="display-4 fw-bold text-primary">予約</h1>
-    <p class="lead text-muted">特別なひとときを、上質な空間で。</p>
-    <div class="underline mx-auto"></div>
+  <h1 class="text-white main-color">予約一覧</h1>
   </div>
 
-  <div class="row g-4">
-    <!-- 脱毛 -->
-    <div class="col-md-6 col-lg-3">
-      <div class="coupon-card">
-        <div class="coupon-header">脱毛 予約</div>
-        <div class="coupon-body">
-          <input type="text" class="form-control mb-3" placeholder="お名前">
-          <input type="date" class="form-control mb-3">
-          <input type="time" class="form-control mb-3">
-          <button class="btn coupon-btn w-100">予約する</button>
-        </div>
+  <div class="button-center">
+    <button type="button" class="btn btn-primary">予約中</button>
+    <button type="button" class="btn btn-primary">利用履歴</button>
+  </div>
+  <div class="text-center">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">ヘアカット</h5>
+        <p class="card-text"></p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
       </div>
     </div>
-
-    <!-- 鍼灸 -->
-    <div class="col-md-6 col-lg-3">
-      <div class="coupon-card">
-        <div class="coupon-header">鍼灸 予約</div>
-        <div class="coupon-body">
-          <input type="text" class="form-control mb-3" placeholder="お名前">
-          <input type="date" class="form-control mb-3">
-          <input type="time" class="form-control mb-3">
-          <button class="btn coupon-btn w-100">予約する</button>
-        </div>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">ホワイトニング</h5>
+        <p class="card-text"></p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
       </div>
-    </div>
-
-    <!-- ホワイトニング -->
-    <div class="col-md-6 col-lg-3">
-      <div class="coupon-card">
-        <div class="coupon-header">ホワイトニング 予約</div>
-        <div class="coupon-body">
-          <input type="text" class="form-control mb-3" placeholder="お名前">
-          <input type="date" class="form-control mb-3">
-          <input type="time" class="form-control mb-3">
-          <button class="btn coupon-btn w-100">予約する</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- ヘアカット -->
-    <div class="col-md-6 col-lg-3">
-      <div class="coupon-card">
-        <div class="coupon-header">ヘアカット 予約</div>
-        <div class="coupon-body">
-          <input type="text" class="form-control mb-3" placeholder="お名前">
-          <input type="date" class="form-control mb-3">
-          <input type="time" class="form-control mb-3">
-          <button class="btn coupon-btn w-100">予約する</button>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
 {% endblock %}
