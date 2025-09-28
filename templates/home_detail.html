@@ -1,0 +1,13 @@
+{% for salon in salons %} 
+
+{% block content %}
+<div class="mt-2 ms-2">
+    <div class="m-4">
+        <h2>サロン 詳細</h2>
+        <p>{{ salon.name }} {{ salon.phone }}{{ salon.description }}</p>
+    </div>
+    <div class="m-4">
+        <a href="/home">戻る</a>
+    </div>
+</div>
+{% endblock %}
