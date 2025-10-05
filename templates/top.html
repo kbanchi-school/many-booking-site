@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 
-{% block content %}
+        {% block content %}
 <div class="mt-2 ms-2">
     <div class="m-4">
         <h2>Person 登録サンプル</h2>
@@ -15,8 +15,9 @@
         <ul>
             {% for person in persons %}
             <li>{{ person.name }} {{ person.age }} <a href="/top/detail/{{ person.id }}">くわしくはこちら</a></li>
-            {% endfor %}
+        {% endfor %}
         </ul>
     </div>
 </div>
+
 {% endblock %}

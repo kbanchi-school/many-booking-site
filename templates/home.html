@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 
+
 {% block content %}
 <h1 class="text-white main-color">シェアサロン予約</h1>
 <div class="input-group">
@@ -22,7 +23,7 @@
 		<h5 class="card-title">{{ salon.name }}</h5>
 		<h6 class="card-subtitle mb-2 text-body-secondary">{{ salon.phone }}</h6>
 		<p class="card-text">{{ salon.description }}</p>
-		<a href="/home/detail/{{ salon.id }}" class="card-link">ここから</a>
+		<a href="/home/detail/{{ salon.id }}" >ここから</a>
 	</div>
 	</div>
 	</li>
