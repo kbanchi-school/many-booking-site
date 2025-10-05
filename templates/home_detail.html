@@ -3,9 +3,22 @@
 {% block content %}
 <div class="mt-2 ms-2">
     <div class="m-4">
-        <h2>サロン 詳細</h2>
-        <p>{{ salon.name }} {{ salon.phone }}{{ salon.description }}</p>
+        <h2>店舗 詳細</h2>
+        <p>{{ salon.name }} 📞{{ salon.phone }}{{ salon.description }}</p>
     </div>
+    <h2>メニュー</h2>
+    {% for service in services %}                   
+	<li>
+	<div class="card">
+	<div class="card-body">
+		<h5 class="card-title">{{ service.name }}</h5>
+		<h6 class="card-subtitle mb-2 text-body-secondary">¥{{ service.price_jpy }}</h6>
+		<p class="card-text">{{ service.description }}</p>
+		<a href="/home/detail/{{ service.id }}" >予約</a>
+	</div>
+	</div>
+	</li>
+	 {% endfor %}
     <div class="m-4">
         <a href="/home">戻る</a>
     </div>
