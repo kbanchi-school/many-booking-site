@@ -16,23 +16,24 @@
 <button type="button" class="btn btn-primary">ネイル</button>
 
 <div class="text-center">
-	{% for addres in address %} 
-	{% for workinghour in workinghours %} 
-	{% for salon in salons %}                   
+	 {% for addres in address %} ]
+	 XXX
+	  {% endfor %}
+	   {% for workinghour in workinghours %} ]
+	   XXX
+	  {% endfor %}
+	 {% for salon in salons %}                   
 	<li>
 	<div class="card">
 	<div class="card-body">
 		<h5 class="card-title">{{ salon.name }}</h5>
-		<h6 class="card-subtitle mb-2 text-body-secondary">{{ address.prefecture }},{{ address.city }},{{ address.line1 }},{{ address.line2 }}</h6>
+		<h6 class="card-subtitle mb-2 text-body-secondary">{{ address.prefecture }}{{ address.city }}{{ address.line1 }}{{ address.line2 }}</h6>
 		<p class="card-text">{{ workinghour.start }}~{{ workinghour.end }}</p>
 		<a href="/home/detail/{{ salon.id }}" >ここから</a>
 	</div>
 	</div>
 	</li>
-	{% endfor %}
-	{% endfor %}
-	{% endfor %}
-
+	 {% endfor %}
 </div>
 
 
