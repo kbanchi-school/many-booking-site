@@ -22,7 +22,7 @@
 	<div class="card-body">
 		<h5 class="card-title">{{addres.salon.name}}</h5>
 		<h6 class="card-subtitle mb-2 text-body-secondary">{{ addres.prefecture }}{{ addres.city }}{{ addres.line1 }}{{ addres.line2 }}</h6>
-		<p class="card-text">09:00~20:00</p>
+		<p class="card-text">{{addres.salon.workinghour.start}}~{{addres.salon.workinghour.end}}</p>
 		<a href="/home/detail/{{ addres.salon.id }}" >ここから</a>
 	</div>
 	</div>
