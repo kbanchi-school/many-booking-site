@@ -8,7 +8,8 @@ from database import Salon , Service , Address ,WorkingHour
 @home_bp.route('/')
 def home():
     today_weekday = datetime.now().weekday()
-    addresses = Address.select(Address, Salon, WorkingHour).join(Salon).join(WorkingHour).where(WorkingHour.weekday == today_weekday)
+    addresses = Address.select(Address, Salon, WorkingHour,Service).join(Salon).join(WorkingHour).where(WorkingHour.weekday == today_weekday).switch(Salon).join(Service)
+
     return render_template('home.html', addresses=addresses)
 
 @home_bp.route('/detail/<id>')

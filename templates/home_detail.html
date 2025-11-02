@@ -4,7 +4,8 @@
 <div class="mt-2 ms-2">
     <div class="m-4">
         <h2>店舗 詳細</h2>
-        <p>{{ salon.name }} 📞{{ salon.phone }}{{ salon.description }}</p>
+        <p>{{ salon.name }} 📞{{ salon.phone }}</p>
+		<p>{{ salon.description }}</p>
     </div>
     <h2>メニュー</h2>
     {% for service in services %}                   
