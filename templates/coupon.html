@@ -16,13 +16,23 @@
 
 
 {% for coupon in coupons %}
-<div class="text-center">
+<div class="text-left">
     <div class="card">
       <div class="card-body">
+        
         <h5 class="card-title">{{ coupon.name }}</h5>
-        <p class="card-text">{{ coupon.code }}</p>
-        <p class="card-text">{{ coupon.startsy }}</p>
-        <p class="card-text">{{ coupon.ends }}</p>
+        <div class="card p-3">
+  <label class="form-label">クーポンコード</label>
+  <div class="input-group">
+    <input type="text" class="form-control text-center fw-bold" value= {{ coupon.code }} readonly>
+    <button class="btn btn-outline-secondary" type="button" onclick="navigator.clipboard.writeText('NEWMEMBER20')">
+      <i class="bi bi-clipboard"></i>
+    </button>
+  </div>
+</div>
+
+        <p class="card-text">{{ coupon.starts_at}}</p>
+        <p class="card-text">{{ coupon.description}}</p>
         <a href="#" class="btn btn-primary">使用する</a>
       </div>
   </div>
