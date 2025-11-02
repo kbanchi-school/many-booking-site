@@ -1,61 +1,32 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<h1 class="text-white main-color">クーポン</h1>
-<h1 class="text-white main-color">お得なクーポンをご利用ください</h1>
+<h1 class="text-white main-color">
+  クーポン<div class="fs-5">お得なクーポンをご利用ください</div>
+</h1>
 
-<div class="text-bg-warning p-3">🎁今月の特典  新規会員様限定で初回20%OFFクーポン配布中！</div>
 
-<br>
+<div class="text-bg-warning p-3 mx-2 rounded-2">🎁今月の特典  新規会員様限定で初回20%OFFクーポン配布中！</div>
 
- <div class="text-center">
+ <div class="text-center my-2">
 <button type="button" class="btn btn-secondary">利用可能</button>
 <button type="button" class="btn btn-secondary">使用済み</button>
 <button type="button" class="btn btn-secondary">期限切れ</button>
 </div>
 
-<br>
 
-
-  <div class="text-center">
+{% for coupon in coupons %}
+<div class="text-center">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">鍼灸</h5>
-        <p class="card-text">〇月〇日まで有効</p>
+        <h5 class="card-title">{{ coupon.name }}</h5>
+        <p class="card-text">{{ coupon.code }}</p>
+        <p class="card-text">{{ coupon.startsy }}</p>
+        <p class="card-text">{{ coupon.ends }}</p>
         <a href="#" class="btn btn-primary">使用する</a>
       </div>
   </div>
 </div>
-  <div class="text-center">
-
-
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">ホワイトニング</h5>
-        <p class="card-text">〇月〇日まで有効</p>
-        <a href="#" class="btn btn-primary">使用する</a>
-      </div>
-  </div>
-</div>
-
-  <div class="text-center">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">ヘアカット</h5>
-        <p class="card-text">〇月〇日まで有効</p>
-        <a href="#" class="btn btn-primary">使用する</a>
-      </div>
-  </div>
-</div>
-
-  <div class="text-center">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">脱毛</h5>
-        <p class="card-text">〇月〇日まで有効</p>
-        <a href="#" class="btn btn-primary">使用する</a>
-      </div>
-  </div>
-</div>
+{% endfor %}
 
 {% endblock %}
