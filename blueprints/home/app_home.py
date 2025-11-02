@@ -15,6 +15,7 @@ def home():
 def detail(id):
     salon = Salon.get(Salon.id == id)
     services = Service.select().where(Service.salon == salon)
+    workinghour = WorkingHour.get(WorkingHour.id == id)
 
 
     return render_template('home_detail.html', salon=salon, services=services)
