@@ -1,5 +1,5 @@
 from datetime import datetime
-
+from peewee import prefetch, JOIN
 from flask import render_template, request, redirect, url_for
 from . import home_bp
 
@@ -8,9 +8,22 @@ from database import Salon , Service , Address ,WorkingHour
 @home_bp.route('/')
 def home():
     today_weekday = datetime.now().weekday()
-    addresses = Address.select(Address, Salon, WorkingHour,Service).join(Salon).join(WorkingHour).where(WorkingHour.weekday == today_weekday).switch(Salon).join(Service)
-
-    return render_template('home.html', addresses=addresses)
+    salons_q = (
+        Salon
+        .select(Salon, Address, WorkingHour)
+        .join(Address)
+        .switch(Salon)
+        .join(WorkingHour)
+        .where(
+            WorkingHour.weekday == today_weekday
+        )
+    )
+    services_q = (
+        Service
+        .select()
+    )
+    salons = prefetch(salons_q, services_q)
+    return render_template('home.html', salons=salons)
 
 @home_bp.route('/detail/<id>')
 def detail(id):
