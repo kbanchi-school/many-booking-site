@@ -3,9 +3,12 @@
 {% block content %}
 <div class="mt-2 ms-2">
     <div class="m-4">
-        <h2>店舗 詳細</h2>
-        <p>{{ salon.name }} 📞{{ salon.phone }}</p>
-		<p>{{ salon.description }}</p>
+        <h6>店舗 詳細</h6>
+        <p><h2>{{ salon.name }} </h2></p>	
+		<p>📞{{ salon.phone }}</p>
+		<p>🕒{{ workinghour . start.strftime("%H時%M分")}}~{{ workinghour . end.strftime("%H時%M分")}}</p>
+		<p><h5>店舗について</h5></p>
+		<p><h6>{{ salon.description }}</h6></p>	
     </div>
     <h2>メニュー</h2>
     {% for service in services %}                   

@@ -26,9 +26,9 @@
 				<p class="card-text">
 					🕒{{salon.workinghour.start.strftime("%H時%M分")}}~{{salon.workinghour.end.strftime("%H時%M分")}}</p>
 				{% for service in salon.services %}
-				<p class="card-text">{{service.name}}</p>
+				<span class="badge text-bg-primary">{{service.name}}　\{{ service.price_jpy }}</span>
 				{% endfor %}
-				<a href="/home/detail/{{ salon.id }}">ここから</a>
+				<p><a href="/home/detail/{{ salon.id }}">ここから</a></p>
 			</div>
 		</div>
 	</li>

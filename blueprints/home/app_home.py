@@ -32,4 +32,4 @@ def detail(id):
     workinghour = WorkingHour.get(WorkingHour.id == id)
 
 
-    return render_template('home_detail.html', salon=salon, services=services)
+    return render_template('home_detail.html', salon=salon, services=services ,workinghour=workinghour)
