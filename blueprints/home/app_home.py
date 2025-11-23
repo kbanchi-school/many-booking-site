@@ -3,19 +3,23 @@ from peewee import prefetch, JOIN
 from flask import render_template, request, redirect, url_for
 from . import home_bp
 
-from database import Salon , Service , Address ,WorkingHour
+from database import Salon , Service , Address ,WorkingHour ,SalonImage
 
 @home_bp.route('/')
 def home():
     today_weekday = datetime.now().weekday()
     salons_q = (
         Salon
-        .select(Salon, Address, WorkingHour)
+        .select(Salon, Address, WorkingHour,SalonImage)
+        .join(SalonImage)
+        .switch(Salon)
         .join(Address)
         .switch(Salon)
         .join(WorkingHour)
+        
         .where(
-            WorkingHour.weekday == today_weekday
+            WorkingHour.weekday == today_weekday,
+            SalonImage.sort_order == 0
         )
     )
     services_q = (
