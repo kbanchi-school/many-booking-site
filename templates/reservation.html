@@ -1,11 +1,7 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div class="container my-5">
-  <!-- ページタイトル -->
-  <div class="text-center mb-5">
   <h1 class="text-white main-color">予約一覧</h1>
-  </div>
 
   <div class="button-center">
     <button type="button" class="btn btn-primary">予約中</button>
@@ -15,11 +11,16 @@
   {% for reservation in reservations %}
    <div class="card">
       <div class="card-body">
-        <h5 class="card-title">{{ reservation.amount_jpy }}</h5>
+        <h3 class="card-title">{{ reservation.salon.name }}</h3>
+        <h5 class="card-title">{{ reservation.start_at }}</h5>
+        <span class="card-title">{{ reservation.end_at }}</span>
+        <span>合計金額</span>
+        <span class="card-title">{{ reservation.amount_jpy }}</span>
+        <span>円</span>
         <p class="card-text"></p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <button type="button" class="btn btn-light">詳細・問い合わせ</button>
+        <button type="button" class="btn btn-outline-danger">キャンセル</button>
       </div>
   </div>
   {% endfor %}
-</div>
 {% endblock %}
