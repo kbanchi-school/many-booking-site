@@ -31,12 +31,17 @@
   </div>
 </div>
 
-        <p class="card-text">{{ coupon.starts_at}}</p>
-        <p class="card-text">{{ coupon.description}}</p>
+        <p class="card-text">{{ coupon.end_at if coupon.end_at else"期限なし"}}</p>
+        <p class="card-text">{{ coupon.use_limit if coupon.use_limit else"回数制限なし"}}
+          {% if coupon.use_limit %}
+          回
+          {% endif %}
+        </p>
+        <p class="card-text">{{ coupon.description if coupon.description else"-"}}</p>
         <a href="#" class="btn btn-primary">使用する</a>
       </div>
   </div>
 </div>
-{% endfor %}
+{% endfor %} 
 
 {% endblock %}
