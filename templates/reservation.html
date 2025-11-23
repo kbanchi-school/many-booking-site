@@ -11,10 +11,16 @@
   {% for reservation in reservations %}
    <div class="card">
       <div class="card-body">
-        <h3 class="card-title">{{ reservation.salon.name }}</h3>
-        <h5 class="card-title">{{ reservation.start_at }}</h5>
-        <span class="card-title">{{ reservation.end_at }}</span>
-        <span>合計金額</span>
+        <h2 class="card-title">{{ reservation.salon.name }}</h2>
+        <span class="card-title">{{ reservation.start_at.strftime("%Y年%m月%d日") }}</span>
+        <span class="card-title">🕒{{ reservation.start_at.strftime("%H時%M分") }}</span>
+        <span class="card-title">~{{ reservation.end_at.strftime("%H時%M分") }}</span>
+        <span class="card-title">📍{{ reservation.salon.address.prefecture }}</span>
+        <span class="card-title">{{ reservation.salon.address.city }}</span>
+        <span class="card-title">{{ reservation.salon.address.line1 }}</span>
+        <span class="card-title">{{ reservation.salon.address.line2 }}</span>
+      </div>
+      <div span>合計金額</span>
         <span class="card-title">{{ reservation.amount_jpy }}</span>
         <span>円</span>
         <p class="card-text"></p>
