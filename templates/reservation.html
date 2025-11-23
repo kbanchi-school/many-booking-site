@@ -12,19 +12,14 @@
     <button type="button" class="btn btn-primary">利用履歴</button>
   </div>
   <div class="text-center">
-    <div class="card">
+  {% for reservation in reservations %}
+   <div class="card">
       <div class="card-body">
-        <h5 class="card-title">ヘアカット</h5>
-        <p class="card-text"></p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">ホワイトニング</h5>
+        <h5 class="card-title">{{ reservation.amount_jpy }}</h5>
         <p class="card-text"></p>
         <a href="#" class="btn btn-primary">Go somewhere</a>
       </div>
   </div>
+  {% endfor %}
 </div>
 {% endblock %}
