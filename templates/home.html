@@ -3,34 +3,44 @@
 
 {% block content %}
 <h1 class="text-white main-color">シェアサロン予約</h1>
-<div class="input-group">
+<div class="input-group  p-3 mx-2">
 	<input type="text" class="form-control" placeholder="サロン名・サービス・エリアで検索">
 	<span class="input-group-btn">
 		<button type="button" class="btn btn-primary">検索</button>
 	</span>
 </div>
-<button type="button" class="btn btn-primary">すべて</button>
-<button type="button" class="btn btn-primary">カット</button>
-<button type="button" class="btn btn-primary">脱毛</button>
-<button type="button" class="btn btn-primary">鍼灸</button>
-<button type="button" class="btn btn-primary">ネイル</button>
-<div class="text-white bg-warning p-3 mx-2 rounded-2"><h3>✨新規会員限定特典</h3><h6>初回予約で20%OFFクーポンをプレゼント</h6></div>
-<h3>♡人気のサロン</h3>
+
+<div class="my-2 mx-2">
+	<button type="button" class="btn btn-primary ">すべて</button>
+	<button type="button" class="btn btn-primary">カット</button>
+	<button type="button" class="btn btn-primary">脱毛</button>
+	<button type="button" class="btn btn-primary">鍼灸</button>
+	<button type="button" class="btn btn-primary">ネイル</button>
+</div>
+
+
+<div class="text-white bg-warning p-3 mx-2 rounded-2">
+	✨新規会員限定特典
+	<div>初回予約で20%OFFクーポンをプレゼント</div>
+</div>
+
+<h3 class="my-2">♡人気のサロン</h3>
 
 <div class="text-center">
 	{% for salon in salons %}
 	<li>
-		<div class="card">
+		<div class="card p-3 mx-4 my-3 rounded-2">
 			<div class="card-body">
+				<img src="{{ salon.salonimage.url }}" class="img-thumbnail my-3 "width="200px"height="100px" alt="...">
 				<h5 class="card-title">{{salon.name}}</h5>
 				<h6 class="card-subtitle mb-2 text-body-secondary">📍{{ salon.address.prefecture }}{{ salon.address.city
 					}}{{ salon.address.line1 }}{{ salon.address.line2 }}</h6>
 				<p class="card-text">
 					🕒{{salon.workinghour.start.strftime("%H時%M分")}}~{{salon.workinghour.end.strftime("%H時%M分")}}</p>
 				{% for service in salon.services %}
-				<span class="badge text-bg-primary">{{service.name}}　￥{{ service.price_jpy }}</span>
+				<span class="badge text-bg-primary my-2 ">{{service.name}}　￥{{ service.price_jpy }}</span>
 				{% endfor %}
-				<p><a href="/home/detail/{{ salon.id }}">ここから</a></p>
+				<p><a href="/home/detail/{{ salon.id }}">予約する</a></p>
 			</div>
 		</div>
 	</li>

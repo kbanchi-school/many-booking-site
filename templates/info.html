@@ -2,22 +2,22 @@
 
 {% block content %}
 <h1 class="text-white main-color">お知らせ<div>店舗からの最新情報</div></h1>
-    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-      <div class="btn-group ,position-absolute top-0 start-50 translate-middle m-4">
-        <button type="button" class="btn btn-dark">すべて</button>
-        <button type="button" class="btn btn-dark">未読</button>
-        <button type="button" class="btn btn-dark">既読</button>
-      </div>
-      </div>
+<div class="text-center">
+		<div class="btn-group p-3 mx-2 rounded-6">
+			<button type="button" class="btn btn-dark">すべて</button>
+			<button type="button" class="btn btn-dark">未読</button>
+			<button type="button" class="btn btn-dark">既読</button>
+		</div>
+</div>
 
 <div class="text-center">
 	 {% for notification in notifications %}                   
 	<li>
-	<div class="card">
+	<div class="card my-2 mx-4 ">
 	<div class="card-body">
-		<span class="badge text-bg-primary">{{ notification.title }}</span>
+		<span class="badge text-bg-primary my-2 ">{{ notification.type }}</span>
 
-		<h6 class="card-subtitle mb-2 text-body-secondary">{{ notification.type }}</h6>
+		<h6 class="card-subtitle mb-2 text-body-secondary">{{ notification.title }}</h6>
 		<p class="card-text">{{ notification.body }}</p>
 	</div>
 	</div>
