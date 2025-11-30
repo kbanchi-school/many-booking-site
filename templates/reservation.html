@@ -3,11 +3,11 @@
 {% block content %}
   <h1 class="text-white main-color">予約一覧</h1>
 
-  <div class="button-center">
+  <div class="button-left">
     <button type="button" class="btn btn-primary">予約中</button>
     <button type="button" class="btn btn-primary">利用履歴</button>
   </div>
-  <div class="text-center">
+  <div class="text-left">
   {% for reservation in reservations %}
    <div class="card">
       <div class="card-body">
@@ -24,8 +24,65 @@
         <span class="card-title">{{ reservation.amount_jpy }}</span>
         <span>円</span>
         <p class="card-text"></p>
-        <button type="button" class="btn btn-light">詳細・問い合わせ</button>
-        <button type="button" class="btn btn-outline-danger">キャンセル</button>
+         <!-- Button trigger modal -->
+<button type="button btn-outline-*" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  詳細・問い合わせ
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">予約詳細</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div>
+
+        店舗情報
+{{ reservation.salon.name }}
+        </div>
+
+{{ reservation.salon.address.city }} {{ reservation.salon.address.line1 }} {{ reservation.salon.address.line2 }}
+電話番号
+{{ reservation.salon.phone }}
+予約内容
+2024-01-20 10:00
+
+カット, カラー - 150分
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+        <!-- Button trigger modal -->
+<button type="button btn-outline-*" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModalCancel">
+  キャンセル
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCancel" tabindex="-1" aria-labelledby="exampleModalCancelLabel2" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel2">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
       </div>
   </div>
   {% endfor %}
