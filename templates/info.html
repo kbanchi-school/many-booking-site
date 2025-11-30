@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<h1 class="text-white main-color">お知らせ<div>店舗からの最新情報</div></h1>
+<h1 class="text-white main-color">お知らせ<div><h3>店舗からの最新情報</h3></div></h1>
 <div class="text-center">
 		<div class="btn-group p-3 mx-2 rounded-6">
 			<button type="button" class="btn btn-dark">すべて</button>
@@ -15,8 +15,16 @@
 	<li>
 	<div class="card my-2 mx-4 ">
 	<div class="card-body">
-		<span class="badge text-bg-primary my-2 ">{{ notification.type }}</span>
-
+		
+			{% if notification.type == "campaign" %}
+				🎁<span class="badge text-bg-warning my-2 ">キャンペーン</span>
+			{% 	elif notification.type == "reminder" %}
+				🔔<span class="badge text-bg-light my-2 ">お知らせ</span>
+			{% elif notification.type == "system" %}
+				🔧<span class="badge text-bg-primary my-2 ">システム通知</span>
+			{% else %}
+				<span class="badge text-bg-secondary my-2 ">その他</span>
+			{% endif %}
 		<h6 class="card-subtitle mb-2 text-body-secondary">{{ notification.title }}</h6>
 		<p class="card-text">{{ notification.body }}</p>
 	</div>
