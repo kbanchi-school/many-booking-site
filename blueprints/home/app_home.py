@@ -37,10 +37,10 @@ def detail(id):
 
     return render_template('home_detail.html', salon=salon, services=services ,workinghour=workinghour)
 
-@home_bp.route('/detail/<int:salon_id>/<int:service_id>/calendar')
-def calender(id):
-    salon = Salon.get(Salon.id == id)
-    services = Service.select().where(Service.salon == salon)
-    workinghour = WorkingHour.get(WorkingHour.id == id)
+@home_bp.route('/detail/<salon_id>/<service_id>/calendar')
+def detail_calender(salon_id, service_id):
+    salon = Salon.get(Salon.id == salon_id)
+    services = Service.select().where(Service.id == service_id ,Service.salon == salon)
+    workinghour = WorkingHour.get(WorkingHour.id == salon)
 
     return render_template('home_calendar.html',salon=salon, services=services ,workinghour=workinghour)
