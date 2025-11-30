@@ -1,7 +1,294 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div class="mt-2 ms-2">
-    <h2>カレンダー</h2>
+<style>
+    /* カレンダーの見た目を少し調整 */
+    .calendar-table th,
+    .calendar-table td {
+        text-align: center;
+        vertical-align: middle;
+        padding: 0.4rem;
+        font-size: 0.85rem;
+    }
+
+    .time-col {
+        width: 70px;
+        font-weight: 600;
+        background-color: #f8f9fa;
+        position: sticky;
+        left: 0;
+        z-index: 2;
+    }
+
+    .calendar-wrapper {
+        overflow-x: auto;
+    }
+
+    /* 予約可能ボタン */
+    .slot-btn {
+        width: 100%;
+        padding: 0.25rem 0.1rem;
+        font-size: 0.8rem;
+    }
+
+    /* 選択中スタイル */
+    .slot-btn.active {
+        color: #fff;
+    }
+
+    /* 予約不可セル */
+    .slot-disabled {
+        background-color: #f1f1f1;
+        color: #bbb;
+        font-size: 0.75rem;
+    }
+
+    /* 上部の日付ヘッダー */
+    .day-header {
+        font-size: 0.85rem;
+    }
+
+    .day-header .dow {
+        font-size: 0.75rem;
+        color: #666;
+    }
+</style>
+
+<div class="container py-4">
+    <!-- タイトル & 週移動ボタン -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="h4 mb-0">予約カレンダー</h1>
+        <div class="d-flex align-items-center gap-2">
+            <button class="btn btn-outline-secondary btn-sm" id="prevWeekBtn">&lt; 前の週</button>
+            <div id="currentWeekLabel" class="fw-bold"></div>
+            <button class="btn btn-outline-secondary btn-sm" id="nextWeekBtn">次の週 &gt;</button>
+        </div>
+    </div>
+
+    <!-- スタッフ・メニュー選択エリア（お好みで） -->
+    <div class="row g-2 mb-3">
+        <div class="col-md-4">
+            <label class="form-label mb-1">メニュー</label>
+            <select class="form-select form-select-sm">
+                <option>カット</option>
+                <option>カット＋カラー</option>
+                <option>カット＋パーマ</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label class="form-label mb-1">スタッフ</label>
+            <select class="form-select form-select-sm">
+                <option>指名なし</option>
+                <option>スタイリストA</option>
+                <option>スタイリストB</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- カレンダー本体 -->
+    <div class="calendar-wrapper mb-3">
+        <table class="table table-bordered calendar-table bg-white">
+            <thead class="table-light">
+                <tr>
+                    <th class="time-col">時間</th>
+                    <!-- 日付ヘッダーはJSで埋める -->
+                    <th id="day-0" class="day-header"></th>
+                    <th id="day-1" class="day-header"></th>
+                    <th id="day-2" class="day-header"></th>
+                    <th id="day-3" class="day-header"></th>
+                    <th id="day-4" class="day-header"></th>
+                    <th id="day-5" class="day-header"></th>
+                    <th id="day-6" class="day-header"></th>
+                </tr>
+            </thead>
+            <tbody id="calendarBody">
+                <!-- 時間×日付のマスは JS で生成 -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 選択中の日時表示 -->
+    <div class="card">
+        <div class="card-body">
+            <h2 class="h6 mb-2">選択中の予約日時</h2>
+            <p id="selectedSlotText" class="mb-0 text-muted">
+                まだ選択されていません
+            </p>
+        </div>
+    </div>
 </div>
+
+<!-- Bootstrap JS + 依存パッケージ -->
+<script>
+    // ===== 設定部分 =====
+    const startHour = 10;   // 10:00 開店
+    const endHour = 19;   // 19:00 まで（終了時刻）
+    const slotMinutes = 30; // 30分刻み
+
+    // ダミーの「空き状況」
+    // true: 予約可能 / false: 予約不可
+    // [時間インデックス][曜日インデックス] の2次元配列
+    let availability = [];
+
+    // 今、表示している週の「週の開始日」（日曜日）を保持
+    let currentWeekStart = getWeekStart(new Date());
+
+    const dowLabels = ['日', '月', '火', '水', '木', '金', '土'];
+
+    // ===== 日付系ユーティリティ =====
+    function getWeekStart(date) {
+        const d = new Date(date);
+        const day = d.getDay(); // 0:日〜6:土
+        d.setHours(0, 0, 0, 0);
+        d.setDate(d.getDate() - day); // その週の日曜日に移動
+        return d;
+    }
+
+    function formatDate(d) {
+        const month = d.getMonth() + 1;
+        const date = d.getDate();
+        return `${month}/${date}`;
+    }
+
+    function formatTimeFromMinutes(totalMinutes) {
+        const h = Math.floor(totalMinutes / 60);
+        const m = totalMinutes % 60;
+        return `${String(h).padStart(2, '0')}:${m === 0 ? '00' : m}`;
+    }
+
+    // ===== カレンダー生成 =====
+    function initAvailability() {
+        // 時間スロット数
+        const totalMinutes = (endHour - startHour) * 60;
+        const slotCount = totalMinutes / slotMinutes;
+
+        availability = [];
+        for (let i = 0; i < slotCount; i++) {
+            const row = [];
+            for (let j = 0; j < 7; j++) {
+                // 本来は予約がはいっている場合のみpush
+                row.push(true); // 70%くらい○
+            }
+            availability.push(row);
+        }
+    }
+
+    function renderWeekHeader() {
+        const label = document.getElementById('currentWeekLabel');
+
+        const end = new Date(currentWeekStart);
+        end.setDate(end.getDate() + 6);
+
+        label.textContent = `${formatDate(currentWeekStart)}（${dowLabels[0]}） 〜 ${formatDate(end)}（${dowLabels[6]}）`;
+
+        for (let i = 0; i < 7; i++) {
+            const d = new Date(currentWeekStart);
+            d.setDate(d.getDate() + i);
+            const th = document.getElementById(`day-${i}`);
+            th.innerHTML = `
+        <div>${formatDate(d)}</div>
+        <div class="dow">${dowLabels[d.getDay()]}曜</div>
+      `;
+        }
+    }
+
+    function renderCalendarBody() {
+        const tbody = document.getElementById('calendarBody');
+        tbody.innerHTML = '';
+
+        const totalMinutes = (endHour - startHour) * 60;
+        const slotCount = totalMinutes / slotMinutes;
+
+        for (let slotIndex = 0; slotIndex < slotCount; slotIndex++) {
+            const tr = document.createElement('tr');
+
+            // 時刻（左端）
+            const timeCell = document.createElement('td');
+            timeCell.classList.add('time-col');
+            const minutesFromStart = startHour * 60 + slotIndex * slotMinutes;
+            timeCell.textContent = formatTimeFromMinutes(minutesFromStart);
+            tr.appendChild(timeCell);
+
+            // 各曜日の空き状況セル
+            for (let dayIndex = 0; dayIndex < 7; dayIndex++) {
+                const td = document.createElement('td');
+
+                if (availability[slotIndex][dayIndex]) {
+                    // 予約可能
+                    const d = new Date(currentWeekStart);
+                    d.setDate(d.getDate() + dayIndex);
+
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = 'btn btn-outline-primary slot-btn';
+                    btn.textContent = '○';
+                    btn.dataset.date = d.toISOString();
+                    btn.dataset.time = formatTimeFromMinutes(minutesFromStart);
+
+                    btn.addEventListener('click', onSlotClick);
+
+                    td.appendChild(btn);
+                } else {
+                    // 予約不可
+                    td.classList.add('slot-disabled');
+                    td.textContent = '－';
+                }
+
+                tr.appendChild(td);
+            }
+
+            tbody.appendChild(tr);
+        }
+    }
+
+    // ===== スロットクリック時 =====
+    let selectedButton = null;
+
+    function onSlotClick(e) {
+        const btn = e.currentTarget;
+
+        // 一つだけ選択状態にする
+        if (selectedButton && selectedButton !== btn) {
+            selectedButton.classList.remove('active');
+        }
+        btn.classList.toggle('active');
+        selectedButton = btn.classList.contains('active') ? btn : null;
+
+        const info = document.getElementById('selectedSlotText');
+        if (!selectedButton) {
+            info.textContent = 'まだ選択されていません';
+            info.classList.add('text-muted');
+            return;
+        }
+
+        const date = new Date(selectedButton.dataset.date);
+        const time = selectedButton.dataset.time;
+        const text = `${date.getMonth() + 1}月${date.getDate()}日（${dowLabels[date.getDay()]}） ${time}〜`;
+        info.textContent = text;
+        info.classList.remove('text-muted');
+    }
+
+    // ===== 週移動ボタン =====
+    document.getElementById('prevWeekBtn').addEventListener('click', () => {
+        currentWeekStart.setDate(currentWeekStart.getDate() - 7);
+        initAvailability();
+        renderWeekHeader();
+        renderCalendarBody();
+        onSlotClick({ currentTarget: { classList: { contains: () => false } } }); // 選択解除のための雑処理
+    });
+
+    document.getElementById('nextWeekBtn').addEventListener('click', () => {
+        currentWeekStart.setDate(currentWeekStart.getDate() + 7);
+        initAvailability();
+        renderWeekHeader();
+        renderCalendarBody();
+        onSlotClick({ currentTarget: { classList: { contains: () => false } } });
+    });
+
+    // ===== 初期表示 =====
+    initAvailability();
+    renderWeekHeader();
+    renderCalendarBody();
+</script>
+
 {% endblock %}
