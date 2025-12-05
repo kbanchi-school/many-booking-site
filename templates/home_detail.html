@@ -5,7 +5,7 @@
     <div class="m-4">
         <h6>店舗 詳細</h6>
         <p><h2>{{ salon.name }} </h2></p>	
-		<p>📞{{ salon.phone }}</p>
+		<p>📞 <a href="tel:{{ salon.phone }}">{{ salon.phone }}</a></p>
 		<p>🕒{{ workinghour . start.strftime("%H時%M分")}}~{{ workinghour . end.strftime("%H時%M分")}}</p>
 		<p><h5>店舗について</h5></p>
 		<p><h6>{{ salon.description }}</h6></p>	
