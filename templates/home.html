@@ -3,21 +3,24 @@
 
 {% block content %}
 <h1 class="text-white main-color">シェアサロン予約</h1>
-<div class="input-group  p-3 mx-2">
-	<input type="text" class="form-control" placeholder="サロン名・サービス・エリアで検索">
-	<span class="input-group-btn">
-		<button type="button" class="btn btn-primary">検索</button>
-	</span>
-</div>
+<form action="/home">
+	<div class="input-group  p-3 mx-2">
+		<input name="search" type="text" class="form-control" placeholder="サロン名・サービス・エリアで検索">
+		<span class="input-group-btn">
+			<button type="submit" class="btn btn-primary">検索</button>
+		</span>
+	</div>
+</form>
 
-<div class="my-2 mx-2">
-	<button type="button" class="btn btn-primary ">すべて</button>
-	<button type="button" class="btn btn-primary">カット</button>
-	<button type="button" class="btn btn-primary">脱毛</button>
-	<button type="button" class="btn btn-primary">鍼灸</button>
-	<button type="button" class="btn btn-primary">ネイル</button>
-</div>
-
+<form action="/home">
+	<div class="my-2 mx-2">
+		<button type="submit" name = "category" value="all" class="btn btn-primary ">すべて</button>
+		<button type="submit"  name = "category" value="カット" class="btn btn-primary">カット</button>
+		<button type="submit"  name = "category" value="脱毛" class="btn btn-primary">脱毛</button>
+		<button type="submit"  name = "category" value="鍼灸" class="btn btn-primary">鍼灸</button>
+		<button type="submit"  name = "category" value="ネイル" class="btn btn-primary">ネイル</button>
+	</div>
+</form>
 
 <div class="text-white bg-warning p-3 mx-2 rounded-2">
 	✨新規会員限定特典

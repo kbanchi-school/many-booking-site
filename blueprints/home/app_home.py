@@ -1,5 +1,5 @@
 from datetime import datetime
-from peewee import prefetch, JOIN
+from peewee import prefetch, JOIN 
 from flask import render_template, request, redirect, url_for
 from . import home_bp
 
@@ -7,6 +7,9 @@ from database import Salon , Service , Address ,WorkingHour ,SalonImage
 
 @home_bp.route('/')
 def home():
+    search = request.args.get("search", "")
+    category = request.args.get("category", "")
+    print(search)
     today_weekday = datetime.now().weekday()
     salons_q = (
         Salon
@@ -16,15 +19,27 @@ def home():
         .join(Address)
         .switch(Salon)
         .join(WorkingHour)
-        
+
+
         .where(
-            WorkingHour.weekday == today_weekday,
-            SalonImage.sort_order == 0
+            (WorkingHour.weekday == today_weekday)&
+            (SalonImage.sort_order == 0)&
+            (
+                (Salon.name.contains(search)) |
+                (Salon.description.contains(search))
+            )
+            )
         )
-    )
+    
     services_q = (
         Service
         .select()
+
+        .where(
+            (Service.name == category)
+            )
+
+
     )
     salons = prefetch(salons_q, services_q)
     return render_template('home.html', salons=salons)
