@@ -38,23 +38,18 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <div>
+        
+        <div class="text-secondary">店舗情報</div>
+        {{ reservation.salon.name }} 
+        <div class="text-secondary">{{ reservation.salon.address.city }} {{ reservation.salon.address.line1 }} {{ reservation.salon.address.line2 }}</div>
+        <div class="text-secondary">📞{{ reservation.salon.phone }}</div>
+        <div class="text-secondary">予約内容</div>
+        2024-01-20 10:00
 
-        店舗情報
-{{ reservation.salon.name }}
-        </div>
-
-{{ reservation.salon.address.city }} {{ reservation.salon.address.line1 }} {{ reservation.salon.address.line2 }}
-電話番号
-{{ reservation.salon.phone }}
-予約内容
-2024-01-20 10:00
-
-カット, カラー - 150分
+        カット, カラー - 150分
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary">📞店舗に電話をする</button>
       </div>
     </div>
   </div>
@@ -70,15 +65,16 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel2">Modal title</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel2">予約をキャンセルしますか？</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        ...
+      <div class="modal-body text-secondary small">
+        以下の予約をキャンセルします。この操作は取り消せません。
       </div>
+      
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-white" data-bs-dismiss="modal">戻る</button>
+        <button type="button" class="btn btn-danger">キャンセルする</button>
       </div>
     </div>
   </div>
