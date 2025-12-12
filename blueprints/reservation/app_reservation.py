@@ -6,5 +6,12 @@ from database import Address
 
 @reservation_bp.route('/')
 def reservation():
-    reservations = Reservation.select(Reservation,Salon,Address).join(Salon).join(Address)
+    category = request.args.get("category","")
+    print(category)
+    if category == "reservation":
+        reservations = Reservation.select(Reservation,Salon,Address).join(Salon).join(Address).where(Reservation.status == 2)
+    elif category == "reservation history":
+        reservations = Reservation.select(Reservation,Salon,Address).join(Salon).join(Address).where(Reservation.payment_status == 1)
+    else:
+        reservations = Reservation.select(Reservation,Salon,Address).join(Salon).join(Address)
     return render_template('reservation.html',reservations=reservations)
