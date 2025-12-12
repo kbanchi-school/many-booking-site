@@ -3,10 +3,12 @@
 {% block content %}
   <h1 class="text-white main-color">予約一覧</h1>
 
+  <form action="/reservation">
   <div class="button-left">
-    <button type="button" class="btn btn-primary">予約中</button>
-    <button type="button" class="btn btn-primary">利用履歴</button>
+    <button type="submit" class="btn btn-primary " name = "category" value= "reservation">予約中</button>
+    <button type="submit" class="btn btn-primary " name = "category" value= "reservation history">利用履歴</button>
   </div>
+  </form>
   <div class="text-left">
   {% for reservation in reservations %}
    <div class="card">
@@ -49,7 +51,8 @@
         カット, カラー - 150分
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary">📞店舗に電話をする</button>
+        <a class="btn btn-primary" href="tel:{{reservation.salon.phone }}">📞店舗に電話をする</a> 
+      
       </div>
     </div>
   </div>
