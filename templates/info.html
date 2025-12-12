@@ -13,23 +13,34 @@
 <div class="text-center">
 	 {% for notification in notifications %}                   
 	<li>
-	<div class="card my-2 mx-4 ">
-	<div class="card-body">
-		
-			{% if notification.type == "campaign" %}
-				🎁<span class="badge text-bg-warning my-2 ">キャンペーン</span>
-			{% 	elif notification.type == "reminder" %}
-				🔔<span class="badge text-bg-light my-2 ">お知らせ</span>
-			{% elif notification.type == "system" %}
-				🔧<span class="badge text-bg-primary my-2 ">システム通知</span>
-			{% else %}
-				<span class="badge text-bg-secondary my-2 ">その他</span>
-			{% endif %}
-		<h6 class="card-subtitle mb-2 text-body-secondary">{{ notification.title }}</h6>
-		<p class="card-text">{{ notification.body }}</p>
-	</div>
-	</div>
+		<form action="/info/read/{{notification.id}}" method="post" class="card my-2 mx-4 text-decoration-none text-reset">
+			<button class="card-body"type="submit">
+
+				{% if notification.is_read == 0 %}
+					📩
+				{% else %}
+					✔️
+				{% endif %}
+
+				{% if notification.type == "campaign" %}
+					🎁<span class="badge text-bg-warning my-2 ">キャンペーン</span>
+				{% elif notification.type == "reminder" %}
+					🔔<span class="badge text-bg-light my-2 ">お知らせ</span>
+				{% elif notification.type == "system" %}
+					🔧<span class="badge text-bg-primary my-2 ">システム通知</span>
+				{% else %}
+					<span class="badge text-bg-secondary my-2 ">その他</span>
+				{% endif %}
+
+				
+
+				<h6 class="card-subtitle mb-2 text-body-secondary">{{ notification.title }}</h6>
+				<p class="card-text">{{ notification.body }}</p>
+
+			</button>
+		</form>
 	</li>
+
 	 {% endfor %}
 </div>
 

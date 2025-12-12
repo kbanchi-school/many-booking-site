@@ -36,7 +36,9 @@ def home():
         .select()
 
         .where(
-            (Service.name == category)
+
+            (Service.category == category)
+            
             )
 
 

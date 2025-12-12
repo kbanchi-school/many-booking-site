@@ -22,3 +22,14 @@ def person():
 def detail(id):
     person = Person.get(Person.id == id)
     return render_template('top_detail.html', person=person)
+
+# Person更新
+@top_bp.route('/update/<id>', methods=['POST'])
+def person_update(id):
+    name = request.form['name']
+    age = request.form['age']
+    person = Person.get(id=id)
+    person.name = name
+    person.age = age
+    person.save()
+    return redirect("/top/detail/"+id)
