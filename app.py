@@ -136,6 +136,9 @@ def create_app():
         session.clear()
         return jsonify({"ok": True})
     
+    if not (app.config["ENV"] == "local" or app.config["ENV"] == "dev"):
+        seed_data.main()
+    
     return app
 
 if __name__ == '__main__':
@@ -143,5 +146,4 @@ if __name__ == '__main__':
     if app.config["ENV"] == "local" or app.config["ENV"] == "dev":
         app.run(debug=True, host='0.0.0.0', port=5001)  
     else:
-        seed_data.main()
         app.run(debug=True, host='0.0.0.0', port=5001)
