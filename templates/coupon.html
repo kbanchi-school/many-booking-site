@@ -9,9 +9,13 @@
 <div class="text-bg-warning p-3 mx-2 rounded-2">🎁今月の特典  新規会員様限定で初回20%OFFクーポン配布中！</div>
 
  <div class="text-center my-2">
-<button type="button" class="btn btn-secondary">利用可能</button>
-<button type="button" class="btn btn-secondary">使用済み</button>
-<button type="button" class="btn btn-secondary">期限切れ</button>
+  <form action="/coupon">
+<button type="submit" name = "category" class="btn btn-secondary" value= "use">利用可能</button>
+<button type="submit" name = "category" class="btn btn-secondary" value= "uses">使用済み</button>
+<button type="submit" name = "category" class="btn btn-secondary" value= "can not use">期限切れ</button>
+
+  </form>
+
 </div>
 
 

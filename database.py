@@ -188,6 +188,7 @@ class Coupon(BaseModel):
     ends_at = DateTimeField(null=True)
     is_active = BooleanField(default=True)
 
+
 class CouponRedemption(BaseModel):
     id = AutoField()
     coupon = ForeignKeyField(Coupon, backref='redemptions', on_delete='CASCADE', index=True)
