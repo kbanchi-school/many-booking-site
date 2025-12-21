@@ -19,6 +19,7 @@ import requests
 from datetime import timedelta
 
 from database import *
+import seed_data
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -142,4 +143,5 @@ if __name__ == '__main__':
     if app.config["ENV"] == "local" or app.config["ENV"] == "dev":
         app.run(debug=True, host='0.0.0.0', port=5001)  
     else:
+        seed_data.main()
         app.run(debug=True, host='0.0.0.0', port=5001)
