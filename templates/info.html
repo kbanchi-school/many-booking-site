@@ -3,11 +3,14 @@
 {% block content %}
 <h1 class="text-white main-color">お知らせ<div><h3>店舗からの最新情報</h3></div></h1>
 <div class="text-center">
+	<form action="/info">
+
 		<div class="btn-group p-3 mx-2 rounded-6">
-			<button type="button" class="btn btn-dark">すべて</button>
-			<button type="button" class="btn btn-dark">未読</button>
-			<button type="button" class="btn btn-dark">既読</button>
+			<button type="submit" name = "is_read" value="all" class="btn btn-dark">すべて</button>
+			<button type="submit"  name = "is_read" value="0" class="btn btn-dark">未読</button>
+			<button type="submit"  name = "is_read" value="1" class="btn btn-dark">既読</button>
 		</div>
+	</form>
 </div>
 
 <div class="text-center">
