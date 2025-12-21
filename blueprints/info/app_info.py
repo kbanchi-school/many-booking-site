@@ -12,7 +12,13 @@ def info():
     if isread in ("0", "1"):
         query = query.where(Notification.is_read == int(isread))
 
-    return render_template('info.html', notifications=query)
+    unread_count = Notification.select().where(Notification.is_read == 0).count()
+
+    return render_template(
+        'info.html',
+        notifications=query,
+        unread_count=unread_count
+    )
 
 
 @info_bp.route('/read/<id>', methods=['POST'])
